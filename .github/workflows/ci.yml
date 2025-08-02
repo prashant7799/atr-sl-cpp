@@ -1,20 +1,35 @@
+name: C++ CI
+
+# ─────────── WHEN TO RUN ───────────
+on:
+  push:
+    branches: [ main ]     # run on every push to main
+  pull_request:            # and on any PR targeting main
+
+# ─────────── WHAT TO RUN ───────────
 jobs:
   build-test:
     runs-on: ubuntu-latest
+
     steps:
+      # 1) checkout code
       - uses: actions/checkout@v4
 
+      # 2) install Conan 2 and Ninja build tool
       - name: Install Conan 2 & Ninja
         run: |
           pip install --upgrade pip
           pip install conan==2.* ninja
 
-      - name: Detect default Conan profile   # ← NEW step
+      # 3) create a default Conan profile on the fresh runner
+      - name: Detect default Conan profile
         run: conan profile detect --force
 
+      # 4) install third-party dependencies (GTest, Benchmark)
       - name: Install dependencies with Conan
         run: conan install . -of build --build=missing
 
+      # 5) configure CMake + build targets
       - name: Configure & build with CMake
         run: |
           cmake -B build -G Ninja \
@@ -22,6 +37,6 @@ jobs:
                 -DCMAKE_BUILD_TYPE=Release
           cmake --build build
 
+      # 6) run unit-tests
       - name: Run unit tests
         run: ctest --output-on-failure --test-dir build
-
