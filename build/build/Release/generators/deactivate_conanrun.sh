@@ -1,1 +1,0 @@
-. "/Users/prashantlohar/quant15m_cpp/build/build/Release/generators/deactivate_conanrunenv-release-armv8.sh"

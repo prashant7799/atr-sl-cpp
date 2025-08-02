@@ -1,5 +1,0 @@
-/Users/prashantlohar/quant15m_cpp/build/CMakeFiles/atr_sl.dir
-/Users/prashantlohar/quant15m_cpp/build/CMakeFiles/atr_tests.dir
-/Users/prashantlohar/quant15m_cpp/build/CMakeFiles/test.dir
-/Users/prashantlohar/quant15m_cpp/build/CMakeFiles/edit_cache.dir
-/Users/prashantlohar/quant15m_cpp/build/CMakeFiles/rebuild_cache.dir
