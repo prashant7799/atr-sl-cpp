@@ -1,0 +1,1 @@
+. "/Users/prashantlohar/quant15m_cpp/test_package/build/apple-clang-16-armv8-gnu17-release/generators/deactivate_conanbuildenv-release-armv8.sh"

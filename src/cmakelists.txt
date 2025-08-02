@@ -1,0 +1,5 @@
+add_library(atr_sl src/atr_sl.cpp)
+targer_include_directories(atr_sl PUBLIC include)
+
+add_executable(atr_demo src/main.cpp)  
+targer_link_libraries(atr_demo PRIVATE atr_sl)
