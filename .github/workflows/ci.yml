@@ -1,0 +1,31 @@
+name: C++ CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Conan 2 & Ninja
+        run: |
+          pip install --upgrade pip
+          pip install conan==2.* ninja
+
+      - name: Install dependencies with Conan
+        run: conan install . -of build --build=missing
+
+      - name: Configure & build with CMake
+        run: |
+          cmake -B build -G Ninja \
+                -DCMAKE_TOOLCHAIN_FILE=build/build/Release/generators/conan_toolchain.cmake \
+                -DCMAKE_BUILD_TYPE=Release
+          cmake --build build
+
+      - name: Run unit tests
+        run: ctest --output-on-failure --test-dir build
+
